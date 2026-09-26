@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package product;
+
+option go_package = "github.com/jihadable/learn-grpc-proto/product";
+
+import "category/category.proto";
+
+message Product {
+    int64 id = 1;
+    string name = 2;
+    string description = 3;
+    double price = 4;
+    category.Category category = 5;
+}
+
+message Empty {}
+
+message Products {
+    repeated Product data = 1;
+}
+
+message Id {
+    int64 id = 1;
+}
+
+message Status {
+    int32 status = 1;
+}
+
+service ProductService {
+    rpc CreateProduct(Product) returns (Product) {}
+    rpc GetProducts(Empty) returns (Products) {}
+    rpc GetProduct(Id) returns (Product) {}
+    rpc UpdateProduct(Id) returns (Product) {}
+    rpc DeleteProduct(Id) returns (Status) {}
+}

@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package category;
+
+option go_package = "github.com/jihadable/learn-grpc-proto/category";
+
+message Category {
+    int64 id = 1;
+    string name = 2;
+}
+
+message Categories {
+    repeated Category data = 1;
+}
+
+message Empty {}
+
+message Id {
+    int64 id = 1;
+}
+
+message Status {
+    int32 status = 1;
+}
+ 
+service CategoryService {
+    rpc CreateCategory(Category) returns (Category) {}
+    rpc GetCategories(Empty) returns (Categories) {}
+    rpc GetCategory(Id) returns (Category) {}
+    rpc UpdateCategory(Id) returns (Category) {}
+    rpc DeleteCategory(Id) returns (Status) {}
+}
